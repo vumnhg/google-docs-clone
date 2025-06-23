@@ -5,8 +5,8 @@ import {
   CopyIcon,
   Link2OffIcon,
   PenIcon,
-  GlobeIcon,
   AlignRightIcon,
+  GlobeIcon,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -89,15 +89,42 @@ export function LinkPopup({
 
   const getTitle = () => {
     if (!preview?.title) return new URL(href).hostname;
+
     const raw = preview.title.trim();
-    if (
-      raw.length > 50 &&
-      (raw.includes(" | ") || raw.includes(" - ") || raw.includes(" · "))
-    ) {
-      return raw.split(/ \| | - | ·/)[0];
+
+    const parts = raw.split(/ \| | - | · /);
+    if (parts.length > 1) {
+      return parts[0];
     }
+
     return raw;
   };
+
+  function getFaviconElement(
+    previewUrl: string | undefined,
+    fallbackUrl: string
+  ) {
+    try {
+      const domain = new URL(previewUrl || fallbackUrl).hostname;
+      if (domain && domain.includes(".")) {
+        return (
+          <img
+            src={`https://www.google.com/s2/favicons?sz=64&domain=${domain}`}
+            className="w-5 h-5 object-contain"
+            alt="favicon"
+          />
+        );
+      }
+    } catch {
+      // fail silently
+    }
+
+    return (
+      <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
+        <GlobeIcon className="size-9/2 text-gray-400" />
+      </div>
+    );
+  }
 
   return (
     <div
@@ -132,23 +159,15 @@ export function LinkPopup({
             <div className="w-5 h-5 flex-shrink-0 mt-0.5">
               {loading ? (
                 <div className="w-4 h-4 border-2 border-gray-300 border-t-transparent animate-spin rounded-full" />
-              ) : preview?.url ? (
-                <img
-                  src={`https://www.google.com/s2/favicons?sz=64&domain=${
-                    new URL(preview.url).hostname
-                  }`}
-                  className="w-5 h-5 object-contain"
-                  alt="favicon"
-                />
               ) : (
-                <GlobeIcon className="size-5 text-gray-400" />
+                getFaviconElement(preview?.url, href)
               )}
             </div>
 
             {/* Title & Link */}
-            <div className="flex flex-col flex-grow min-w-0">
+            <div className="flex flex-col text-blue-600 flex-grow min-w-0">
               <button
-                className="text-sm font-semibold text-gray-900 text-left truncate"
+                className="text-sm font-semibold  text-left truncate"
                 onClick={() => {
                   window.open(href, "_blank");
                   onClose();
@@ -157,7 +176,7 @@ export function LinkPopup({
                 {getTitle()}
               </button>
               {preview?.title && (
-                <span className="text-xs text-blue-600 truncate">{href}</span>
+                <span className="text-xs text-gray-900 truncate">{href}</span>
               )}
             </div>
 
@@ -204,14 +223,14 @@ export function LinkPopup({
             <img
               src={preview.image}
               alt="preview"
-              className="rounded-md border max-h-48 object-cover"
+              className="max-w-full max-h-48 object-contain rounded-md border bg-white"
             />
           )}
 
           {/* Description */}
-          {preview?.description && (
-            <div className="flex items-start gap-2 text-gray-700 mt-1">
-              <AlignRightIcon className="size-max text-gray-500 mt-1 " />
+          {preview?.image && preview?.description && (
+            <div className="flex items-center gap-2 text-gray-700 mt-1">
+              <AlignRightIcon className="w-4 h-4 text-gray-500 flex-shrink-0" />
               <p className="text-xs leading-snug line-clamp-2">
                 {preview.description}
               </p>

@@ -8,23 +8,69 @@ type MicrolinkResponse = {
   };
 };
 
+function isValidUrl(input: string): boolean {
+  try {
+    const url = new URL(input);
+    return url.hostname.includes(".");
+  } catch {
+    return false;
+  }
+}
+
 export async function fetchLinkPreview(url: string): Promise<{
   title?: string;
   description?: string;
   image?: string;
   url?: string;
 }> {
-  const res = await fetch(
-    `https://api.microlink.io/?url=${encodeURIComponent(url)}`
-  );
-  const data = (await res.json()) as MicrolinkResponse;
+  if (!isValidUrl(url)) {
+    return {
+      title: "",
+      description: "",
+      image: "",
+      url,
+    };
+  }
 
-  if (data.status !== "success") throw new Error("Preview failed");
+  try {
+    const res = await fetch(
+      `https://api.microlink.io/?url=${encodeURIComponent(url)}`
+    );
 
-  return {
-    title: data.data.title,
-    description: data.data.description,
-    image: data.data.image?.url,
-    url: data.data.url,
-  };
+    if (!res.ok) {
+      console.warn("Microlink API error:", res.status);
+      return {
+        title: "",
+        description: "",
+        image: "",
+        url,
+      };
+    }
+
+    const data = (await res.json()) as MicrolinkResponse;
+
+    if (data.status !== "success") {
+      return {
+        title: "",
+        description: "",
+        image: "",
+        url,
+      };
+    }
+
+    return {
+      title: data.data.title ?? "",
+      description: data.data.description ?? "",
+      image: data.data.image?.url ?? "",
+      url: data.data.url ?? url,
+    };
+  } catch (err) {
+    console.error("Fetch error:", err);
+    return {
+      title: "",
+      description: "",
+      image: "",
+      url,
+    };
+  }
 }

@@ -138,7 +138,6 @@ function Editor() {
         </table>
         <p>google</p>
       `,
-    // editable: false,
     immediatelyRender: false,
   });
 
