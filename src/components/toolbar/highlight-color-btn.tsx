@@ -1,11 +1,9 @@
 "use client";
 
-import { useEditorStore } from "@/store/use-editor-store";
 import { HighlighterIcon } from "lucide-react";
 import { ColorPicker } from "./color-picker";
 
-export const HighlightColorButton = () => {
-  const { editor } = useEditorStore();
+export const HighlightColorButton = ({ editor }: { editor: any }) => {
   const currentHighlight =
     editor?.getAttributes("highlight")?.color || "#ffffff";
 

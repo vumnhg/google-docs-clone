@@ -1,9 +1,6 @@
-// 📁 components/toolbar/font-family-button.tsx
-
 "use client";
 
 import { useState } from "react";
-import { useEditorStore } from "@/store/use-editor-store";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -13,8 +10,7 @@ import { ChevronDownIcon } from "lucide-react";
 import { EditorTooltip } from "./editor-tooltip";
 import { cn } from "@/lib/utils";
 
-export const FontFamilyButton = () => {
-  const { editor } = useEditorStore();
+export const FontFamilyButton = ({ editor }: { editor: any }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const fonts = [

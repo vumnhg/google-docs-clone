@@ -91,6 +91,17 @@ body {
   :first-child:not(img) {
     margin-top: 0;
   }
+
+  /* Link styles */
+  a {
+    @apply text-blue-600;
+    cursor: pointer;
+
+    &:hover {
+      @apply underline;
+    }
+  }
+
   /* image */
   img {
     display: block;
@@ -191,7 +202,7 @@ body {
   table {
     border-collapse: collapse;
     margin: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     table-layout: fixed;
     width: 100%;
 
@@ -246,10 +257,5 @@ body {
   &.resize-cursor {
     cursor: ew-resize;
     cursor: col-resize;
-  }
-
-  .ProseMirror table td::selection {
-    background: rgba(180, 215, 255, 0.3); /* hoặc transparent */
-    color: inherit;
   }
 }

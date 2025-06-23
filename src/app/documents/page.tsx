@@ -9,7 +9,7 @@ function DocumentPage() {
       <p>
         Click{" "}
         <Link href={`/documents/${pageId}`}>
-          <span className="text-blue-500 underline mx-1">here</span> to do to
+          <span className="text-blue-500 underline mx-1">here</span> to go to
           page {`${pageId}`}
         </Link>
       </p>

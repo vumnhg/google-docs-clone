@@ -1,10 +1,8 @@
 "use client";
 
-import { useEditorStore } from "@/store/use-editor-store";
 import { ColorPicker } from "./color-picker";
 
-export const TextColorButton = () => {
-  const { editor } = useEditorStore();
+export const TextColorButton = ({ editor }: { editor: any }) => {
   const currentColor =
     editor?.getAttributes("textStyle").color?.toLowerCase() || "#000000";
 

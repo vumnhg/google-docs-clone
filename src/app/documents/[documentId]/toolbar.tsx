@@ -18,11 +18,12 @@ import {
 import { Separator } from "@/components/ui/separator";
 import { useEditorStore } from "@/store/use-editor-store";
 
-import { TextColorButton } from "@/components/toolbar/text-color-btn";
+import { EditorTooltip } from "@/components/toolbar/editor-tooltip";
+import { FontFamilyButton } from "@/components/toolbar/font-family-btn";
 import { HighlightColorButton } from "@/components/toolbar/highlight-color-btn";
 import { HeadingButton } from "@/components/toolbar/heading-btn";
-import { FontFamilyButton } from "@/components/toolbar/font-family-btn";
-import { EditorTooltip } from "@/components/toolbar/editor-tooltip";
+import { LinkButton } from "@/components/toolbar/link-btn";
+import { TextColorButton } from "@/components/toolbar/text-color-btn";
 
 import { cn } from "@/lib/utils";
 
@@ -150,27 +151,27 @@ export const Toolbar = () => {
   ];
 
   return (
-    <div className="bg-[#F0F4F9] px-2.5 py-0.5 rounded-[24px] min-h-[40px] flex items-center gap-x-0.5 over-flow-x-auto">
+    <div className="bg-[#F0F4F9] px-2.5 py-0.5 rounded-[24px] w-[1232px] min-h-[40px] flex items-center gap-x-0.5">
       {section[0].map((item) => (
         <ToolbarButton key={item.label} {...item} />
       ))}
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
-      <FontFamilyButton />
+      <FontFamilyButton editor={editor} />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
-      <HeadingButton />
+      <HeadingButton editor={editor} />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       {/* font size */}
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       {section[1].map((item) => (
         <ToolbarButton key={item.label} {...item} />
       ))}
-      <TextColorButton />
-      <HighlightColorButton />
+      <TextColorButton editor={editor} />
+      <HighlightColorButton editor={editor} />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       {section[2].map((item) => (
         <ToolbarButton key={item.label} {...item} />
       ))}
-      {/* link */}
+      <LinkButton editor={editor} />
       {/* image */}
       {/* align */}
       {/* line height */}

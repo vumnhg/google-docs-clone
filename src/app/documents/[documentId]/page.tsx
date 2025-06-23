@@ -13,6 +13,7 @@ export default async function DocumentIdPage({ params }: DocumentIdPageProps) {
       <p>{`document page: ${documentId}`}</p>
       <Toolbar />
       <Editor />
+
       <p>
         Click{" "}
         <Link href="/documents">

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { useEditorStore } from "@/store/use-editor-store";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,8 +11,7 @@ import { EditorTooltip } from "./editor-tooltip";
 import { cn } from "@/lib/utils";
 import { type Level } from "@tiptap/extension-heading";
 
-export const HeadingButton = () => {
-  const { editor } = useEditorStore();
+export const HeadingButton = ({ editor }: { editor: any }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const headings = [
