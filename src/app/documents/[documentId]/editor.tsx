@@ -71,7 +71,7 @@ function Editor() {
 
           setLinkInfo({
             href,
-            top: rect.bottom + window.scrollY + 6, // 6px khoảng cách dưới
+            top: rect.bottom + window.scrollY + 6,
             left: rect.left + window.scrollX,
           });
 
