@@ -1,9 +1,9 @@
 "use client";
-
+import type { Editor } from "@tiptap/react";
 import { HighlighterIcon } from "lucide-react";
 import { ColorPicker } from "./color-picker";
 
-export const HighlightColorButton = ({ editor }: { editor: any }) => {
+export const HighlightColorButton = ({ editor }: { editor: Editor | null }) => {
   const currentHighlight =
     editor?.getAttributes("highlight")?.color || "#ffffff";
 

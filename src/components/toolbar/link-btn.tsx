@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { Editor } from "@tiptap/react";
 import { cn } from "@/lib/utils";
 import {
   DropdownMenu,
@@ -13,7 +14,7 @@ import { EditorTooltip } from "./editor-tooltip";
 import { Button } from "../ui/button";
 import { normalizeUrl } from "@/lib/utils";
 
-export function LinkButton({ editor }: { editor: any }) {
+export function LinkButton({ editor }: { editor: Editor | null }) {
   const [value, setValue] = useState("");
 
   const onApply = () => {

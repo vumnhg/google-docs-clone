@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { Editor } from "@tiptap/react";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +12,7 @@ import { EditorTooltip } from "./editor-tooltip";
 import { cn } from "@/lib/utils";
 import { type Level } from "@tiptap/extension-heading";
 
-export const HeadingButton = ({ editor }: { editor: any }) => {
+export const HeadingButton = ({ editor }: { editor: Editor | null }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const headings = [
@@ -20,9 +21,10 @@ export const HeadingButton = ({ editor }: { editor: any }) => {
     { label: "Heading 2", value: 2, fontSize: "24px" },
     { label: "Heading 3", value: 3, fontSize: "20px" },
   ];
+  const len = headings.length;
 
   const getCurrentHeading = () => {
-    for (let level = 1; level <= 3; level++) {
+    for (let level = 1; level <= len - 1; level++) {
       if (editor?.isActive("heading", { level })) {
         return `Heading ${level}`;
       }
@@ -51,10 +53,7 @@ export const HeadingButton = ({ editor }: { editor: any }) => {
             key={value}
             className={cn(
               "flex items-center gap-x-2 px-2 py-1 rounded-sm hover:bg-neutral-200/80",
-              value === 0 && !editor?.isActive("heading") && "bg-[#f1f3f4]",
-              value !== 0 &&
-                editor?.isActive("heading", { level: value }) &&
-                "bg-[#f1f3f4]"
+              label === getCurrentHeading() && "bg-[#f1f3f4]"
             )}
             style={{ fontSize }}
             onClick={() => {

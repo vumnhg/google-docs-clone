@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { Editor } from "@tiptap/react";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -10,7 +11,7 @@ import { ChevronDownIcon } from "lucide-react";
 import { EditorTooltip } from "./editor-tooltip";
 import { cn } from "@/lib/utils";
 
-export const FontFamilyButton = ({ editor }: { editor: any }) => {
+export const FontFamilyButton = ({ editor }: { editor: Editor | null }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const fonts = [
@@ -21,7 +22,8 @@ export const FontFamilyButton = ({ editor }: { editor: any }) => {
     { label: "Verdana", value: "Verdana, sans-serif" },
   ];
 
-  const currentFont = editor?.getAttributes("textStyle").fontFamily || "Arial";
+  const currentFont =
+    editor?.getAttributes("textStyle").fontFamily || "Arial, sans-serif";
 
   return (
     <DropdownMenu onOpenChange={setIsOpen}>

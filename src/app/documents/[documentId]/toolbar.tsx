@@ -24,8 +24,11 @@ import { HighlightColorButton } from "@/components/toolbar/highlight-color-btn";
 import { HeadingButton } from "@/components/toolbar/heading-btn";
 import { LinkButton } from "@/components/toolbar/link-btn";
 import { TextColorButton } from "@/components/toolbar/text-color-btn";
+import ImageButton from "@/components/toolbar/image-btn";
 
 import { cn } from "@/lib/utils";
+import AlignButton from "@/components/toolbar/align-btn";
+import ListButton from "@/components/toolbar/list-btn";
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -137,7 +140,7 @@ export const Toolbar = () => {
       {
         label: "List",
         icon: ListTodoIcon,
-        tooltip: "Task List",
+        tooltip: "Check List",
         isActive: editor?.isActive("taskList"),
         onClick: () => editor?.chain().focus().toggleTaskList().run(),
       },
@@ -172,10 +175,10 @@ export const Toolbar = () => {
         <ToolbarButton key={item.label} {...item} />
       ))}
       <LinkButton editor={editor} />
-      {/* image */}
-      {/* align */}
+      <ImageButton editor={editor} />
+      <AlignButton editor={editor} />
       {/* line height */}
-      {/* list */}
+      <ListButton editor={editor} />
     </div>
   );
 };
