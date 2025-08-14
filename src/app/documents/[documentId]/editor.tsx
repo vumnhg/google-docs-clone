@@ -22,6 +22,10 @@ import Underline from "@tiptap/extension-underline";
 import { useEditorStore } from "./../../../store/use-editor-store";
 import { LinkPopup } from "@/components/toolbar/link-popup";
 
+import { FontSizeExtension } from "@/extensions/font-size";
+import { LineHeightExtension } from "@/extensions/line-height";
+import Ruler from "./ruler";
+
 function Editor() {
   const { setEditor } = useEditorStore();
   const [linkInfo, setLinkInfo] = useState<{
@@ -89,6 +93,7 @@ function Editor() {
       Highlight.configure({
         multicolor: true,
       }),
+      LineHeightExtension,
       Link.configure({
         autolink: true,
         openOnClick: false,
@@ -101,6 +106,7 @@ function Editor() {
         },
       }),
       FontFamily,
+      FontSizeExtension,
       // Image,
       ImageResize,
       StarterKit.configure({
@@ -147,6 +153,7 @@ function Editor() {
 
   return (
     <div className="size-full bg-[#F9FBFD] overflow-x-auto px-4 print:p-0 print:bg-white print:overflow-visible">
+      <Ruler />
       <div className="min-w-max flex justify-center w-[816px] py-4 print:py-0 mx-auto print:w-full print:min-w-0">
         <EditorContent editor={editor} />
         {linkInfo && (

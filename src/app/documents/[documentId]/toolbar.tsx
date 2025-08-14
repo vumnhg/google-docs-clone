@@ -27,8 +27,10 @@ import { TextColorButton } from "@/components/toolbar/text-color-btn";
 import ImageButton from "@/components/toolbar/image-btn";
 
 import { cn } from "@/lib/utils";
-import AlignButton from "@/components/toolbar/align-btn";
-import ListButton from "@/components/toolbar/list-btn";
+import { AlignButton } from "@/components/toolbar/align-btn";
+import { ListButton } from "@/components/toolbar/list-btn";
+import { FontSizeButton } from "@/components/toolbar/font-size-btn";
+import { LineHeightButton } from "@/components/toolbar/line-height-btn";
 
 interface ToolbarButtonProps {
   onClick?: () => void;
@@ -163,7 +165,7 @@ export const Toolbar = () => {
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       <HeadingButton editor={editor} />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
-      {/* font size */}
+      <FontSizeButton editor={editor} />
       <Separator orientation="vertical" className="h-6 bg-neutral-300" />
       {section[1].map((item) => (
         <ToolbarButton key={item.label} {...item} />
@@ -177,7 +179,7 @@ export const Toolbar = () => {
       <LinkButton editor={editor} />
       <ImageButton editor={editor} />
       <AlignButton editor={editor} />
-      {/* line height */}
+      <LineHeightButton editor={editor} />
       <ListButton editor={editor} />
     </div>
   );

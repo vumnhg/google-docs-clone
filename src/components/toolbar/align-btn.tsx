@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import {
   AlignCenterIcon,
@@ -38,7 +40,7 @@ const alignments = [
   },
 ];
 
-export default function AlignButton({ editor }: { editor: Editor | null }) {
+export const AlignButton = ({ editor }: { editor: Editor | null }) => {
   const [currentAlign, setCurrentAlign] = useState<string>("left");
 
   useEffect(() => {
@@ -97,4 +99,4 @@ export default function AlignButton({ editor }: { editor: Editor | null }) {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};

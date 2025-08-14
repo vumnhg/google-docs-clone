@@ -1,5 +1,12 @@
+"use client";
+
 import { useEffect, useState } from "react";
-import { ChevronDownIcon, ListIcon, ListOrderedIcon } from "lucide-react";
+import {
+  ChevronDownIcon,
+  ListIcon,
+  ListOrderedIcon,
+  LucideIcon,
+} from "lucide-react";
 import type { Editor } from "@tiptap/react";
 import { EditorTooltip } from "@/components/toolbar/editor-tooltip";
 import {
@@ -34,7 +41,7 @@ const LIST_OPTIONS: {
   },
 ];
 
-export default function ListButton({ editor }: { editor: Editor | null }) {
+export const ListButton = ({ editor }: { editor: Editor | null }) => {
   const [list, setList] = useState<"bulletedList" | "orderedList">(
     "bulletedList"
   );
@@ -90,4 +97,4 @@ export default function ListButton({ editor }: { editor: Editor | null }) {
       </DropdownMenuContent>
     </DropdownMenu>
   );
-}
+};
