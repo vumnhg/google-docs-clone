@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "vercel-build": "rm -rf node_modules package-lock.json && npm install --legacy-peer-deps && next build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
